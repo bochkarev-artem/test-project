@@ -1,0 +1,9 @@
+cmf_routing:
+    chain:
+        routers_by_id:
+            router.default:             300
+            routing.dynamic_router:     200
+            cmf_routing.dynamic_router: 100
+    dynamic:
+        enabled: true
+        route_provider_service_id: routing.route_provider

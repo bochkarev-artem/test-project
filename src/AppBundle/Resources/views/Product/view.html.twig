@@ -1,0 +1,17 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body_id 'blog_post_show' %}
+
+{% block title %}{{ product.title }}{% endblock %}
+
+{% block main %}
+    <h1>{{ product.title }}</h1>
+
+    <p class="product-metadata">
+        <span class="metadata"><i class="fa fa-user"></i> {{ product.manufacturer.title }}</span>
+        <img src="{{ product.image }}" />
+    </p>
+    {{ 'product.description'|trans }}: {{ product.description }}<br>
+    {{ 'product.availability'|trans }}: {{ product.availability }}<br>
+    {{ 'product.price'|trans }}: {{ product.price }}
+{% endblock %}

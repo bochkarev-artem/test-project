@@ -1,0 +1,36 @@
+fos_elastica:
+    clients:
+        default: { host: "%elastic_host%", port: "%elastic_port%" }
+    indexes:
+        routes:
+            index_name: routes
+            client:     default
+            use_alias:  true
+            types:
+                route:
+                    properties:
+                        path: { type: string, index: not_analyzed }
+        products:
+            index_name: products
+            client:     default
+            use_alias:  true
+            types:
+                product:
+                    properties:
+                        id:                 { type: integer }
+                        external_id:        { type: integer }
+                        title:              { type: string }
+                        path:               { type: string }
+                        price:              { type: float }
+                        description:        { type: string }
+                        image:              { type: string }
+                        availability:       { type: integer }
+                        manufacturer:
+                            type: "nested"
+                            properties:
+                                title:      { type: string }
+                    persistence:
+                        driver: orm
+                        model: AppBundle\Entity\Product
+                        provider: ~
+                        finder: ~

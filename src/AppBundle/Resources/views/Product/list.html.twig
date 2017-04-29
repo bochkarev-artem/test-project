@@ -1,0 +1,35 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body_id 'blog_index' %}
+
+{% block main %}
+    <form id="search" action="{{ path('homepage') }}">
+        <div>
+            <input type="text" name="query" autofocus
+                   placeholder="{{ 'search'|trans }}" value="{{ query|default('') }}">
+            <button><i class="fa fa-search"></i></button>
+        </div>
+    </form>
+    <br>
+    {% for product in products %}
+        <article class="product">
+            <p class="product-metadata">
+                <span class="metadata"><i class="fa fa-product-hunt"></i>
+                    <a href="/{{ product.path }}">{{ product.title }}</a>
+                </span>
+            </p>
+        </article>
+    {% else %}
+        <div class="well">{{ 'product.no_products_found'|trans }}</div>
+    {% endfor %}
+
+    {% if products.haveToPaginate %}
+        <div class="navigation text-center">
+            {{ pagerfanta(products, 'twitter_bootstrap3', {
+                'routeName': 'homepage',
+                'routeParams': {'query': query},
+                'omitFirstPage': true
+            }) }}
+        </div>
+    {% endif %}
+{% endblock %}

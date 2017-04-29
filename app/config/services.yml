@@ -1,9 +1,38 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/service_container.html
-parameters:
-    #parameter_name: value
-
 services:
-    #service_name:
-    #    class: AppBundle\Directory\ClassName
-    #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+    routing.dynamic_router:
+        class: AppBundle\Routing\DynamicRouter
+        arguments:
+            - "@router.request_context"
+            - "@routing.request_matcher"
+            - "@cmf_routing.generator"
+            - ""
+            - "@?event_dispatcher"
+            - "@cmf_routing.route_provider"
+            - "@fos_elastica.index.routes.route"
+
+    routing.request_matcher:
+        class: AppBundle\Routing\RequestMatcher
+        arguments:
+            - "@routing.route_provider"
+        calls:
+            - [ setContext, ["@router.request_context"] ]
+            - [ setFinalMatcher, ["@cmf_routing.final_matcher"] ]
+
+    routing.route_provider:
+        class: AppBundle\Routing\RouteProvider
+        arguments:
+            - "@fos_elastica.index.routes.route"
+
+    query_service:
+        class: AppBundle\Service\QueryService
+        arguments:
+            - "@fos_elastica.index.products.product"
+
+    search_provider.route:
+        class: AppBundle\Provider\RouteProvider
+        arguments:
+            - "@fos_elastica.index.routes.route"
+            - "@doctrine.orm.default_entity_manager"
+            - 100
+        tags:
+            - { name: fos_elastica.provider, index: routes, type: route }

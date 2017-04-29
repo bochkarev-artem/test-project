@@ -1,0 +1,8 @@
+product:
+    no_products_found: No products found
+    description:       Description
+    availability:      Availability
+    price:             Price
+menu:
+    homepage:          Home
+search:                Search
