@@ -7,8 +7,9 @@ namespace AppBundle\Service;
 
 use AppBundle\Model\QueryParams;
 use Elastica\Query;
-use Elastica\ResultSet;
 use Elastica\Type;
+use Pagerfanta\Adapter\ElasticaAdapter;
+use Pagerfanta\Pagerfanta;
 
 class QueryService
 {
@@ -18,21 +19,18 @@ class QueryService
     private $repository;
 
     /**
-     * @param Type $repository
+     * @var integer
      */
-    public function __construct(Type $repository)
-    {
-        $this->repository = $repository;
-    }
+    private $perPage;
 
     /**
-     * @param Query $query
-     *
-     * @return ResultSet
+     * @param Type    $repository
+     * @param integer $perPage
      */
-    public function query($query)
+    public function __construct(Type $repository, $perPage)
     {
-        return $this->repository->search($query);
+        $this->repository = $repository;
+        $this->perPage    = $perPage;
     }
 
     /**
@@ -40,7 +38,7 @@ class QueryService
      *
      * @return Query
      */
-    public function buildQuery(QueryParams $queryParams)
+    protected function buildQuery(QueryParams $queryParams)
     {
         $query     = new Query();
         $boolQuery = new Query\BoolQuery();
@@ -53,6 +51,23 @@ class QueryService
         $this->applySorting($query, $queryParams);
 
         return $query;
+    }
+
+    /**
+     * @param QueryParams $queryParams
+     * @param integer     $page
+     *
+     * @return Pagerfanta
+     */
+    public function find(QueryParams $queryParams, $page)
+    {
+        $query     = $this->buildQuery($queryParams);
+        $adapter   = new ElasticaAdapter($this->repository, $query);
+        $paginator = new Pagerfanta($adapter);
+        $paginator->setMaxPerPage($this->perPage);
+        $paginator->setCurrentPage($page);
+
+        return $paginator;
     }
 
     /**

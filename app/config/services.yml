@@ -27,6 +27,7 @@ services:
         class: AppBundle\Service\QueryService
         arguments:
             - "@fos_elastica.index.products.product"
+            - "%default_per_page%"
 
     search_provider.route:
         class: AppBundle\Provider\RouteProvider
