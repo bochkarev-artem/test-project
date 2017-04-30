@@ -29,8 +29,9 @@ class ImportProductsDBCommand extends ContainerAwareCommand
     {
         $output->writeln("<info>Import started.</info>");
         $startTime  = time();
-        $importer   = $this->getContainer()->get('product_importer');
-        $dbImporter = $this->getContainer()->get('db_importer');
+        $container  = $this->getContainer();
+        $importer   = $container->get('product_importer');
+        $dbImporter = $container->get('db_importer');
         $importer->import($dbImporter);
 
         $endTime   = time();

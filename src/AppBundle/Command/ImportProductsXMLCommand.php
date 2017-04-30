@@ -29,8 +29,9 @@ class ImportProductsXMLCommand extends ContainerAwareCommand
     {
         $output->writeln("<info>Import started.</info>");
         $startTime   = time();
-        $importer    = $this->getContainer()->get('product_importer');
-        $xmlImporter = $this->getContainer()->get('xml_importer');
+        $container   = $this->getContainer();
+        $importer    = $container->get('product_importer');
+        $xmlImporter = $container->get('xml_importer');
         $importer->import($xmlImporter);
 
         $endTime   = time();
