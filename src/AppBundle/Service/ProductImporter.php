@@ -65,7 +65,7 @@ class ProductImporter
      * @param ImporterInterface $importer
      * @param \Traversable      $products
      */
-    public function iterate($importer, $products)
+    protected function iterate($importer, $products)
     {
         $i = 1;
         foreach ($products as $importProduct) {

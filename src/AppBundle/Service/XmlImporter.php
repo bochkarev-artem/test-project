@@ -50,7 +50,7 @@ class XmlImporter implements ImporterInterface
      *
      * @return ImportProduct
      */
-    function normalize($product)
+    public function normalize($product)
     {
         $accessor      = PropertyAccess::createPropertyAccessor();
         $importProduct = new ImportProduct;
@@ -78,7 +78,7 @@ class XmlImporter implements ImporterInterface
     /**
      * @param string $endpoint
      *
-     * @return \SimpleXMLElement|\Traversable
+     * @return \SimpleXMLElement
      */
     private function getXml($endpoint)
     {
