@@ -29,5 +29,5 @@ parameters:
     import_database_user:
     import_database_password:
 
-# Full local path or url
+# Full local path or url, sample you can find at ./app/products.xml
     xml_path:
