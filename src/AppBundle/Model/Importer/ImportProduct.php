@@ -3,88 +3,44 @@
  * @author Artyom Bochkarev
  */
 
-namespace AppBundle\Entity;
+namespace AppBundle\Model\Importer;
 
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * AppBundle\Entity\Product
- *
- * @ORM\Entity
- * @ORM\Table(
- *     name="product", uniqueConstraints={
- *          @ORM\UniqueConstraint(name="external_product_id", columns={"external_id"})
- *     }
- * )
- */
-class Product implements PageInterface
+class ImportProduct
 {
     /**
-     * @var integer $id
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="product_id", type="integer")
-     */
-    private $id;
-
-    /**
-     * @var integer $externalId
-     *
-     * @ORM\Column(name="external_id", type="integer")
+     * @var integer
      */
     private $externalId;
 
     /**
-     * @var Manufacturer $manufacturer
-     *
-     * @ORM\ManyToOne(targetEntity="Manufacturer", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="manufacturer_id", referencedColumnName="manufacturer_id")
+     * @var string
      */
-    private $manufacturer;
+    private $manufacturerTitle;
 
     /**
-     * @var string $title
-     *
-     * @ORM\Column(name="title", type="string")
+     * @var string
      */
     private $title;
 
     /**
-     * @var string $description
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
+     * @var string
      */
     private $description;
 
     /**
-     * @var float $price
-     *
-     * @ORM\Column(name="price", type="float")
+     * @var float
      */
     private $price;
 
     /**
-     * @var integer $availability
-     *
-     * @ORM\Column(name="availability", type="integer")
+     * @var integer
      */
     private $availability;
 
     /**
-     * @var string $image
-     *
-     * @ORM\Column(name="image", type="string", nullable=true)
+     * @var string
      */
     private $image;
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @return int
@@ -97,7 +53,7 @@ class Product implements PageInterface
     /**
      * @param int $externalId
      *
-     * @return Product
+     * @return ImportProduct
      */
     public function setExternalId($externalId)
     {
@@ -107,21 +63,21 @@ class Product implements PageInterface
     }
 
     /**
-     * @return Manufacturer
+     * @return string
      */
-    public function getManufacturer()
+    public function getManufacturerTitle()
     {
-        return $this->manufacturer;
+        return $this->manufacturerTitle;
     }
 
     /**
-     * @param Manufacturer $manufacturer
+     * @param string $manufacturerTitle
      *
-     * @return Product
+     * @return ImportProduct
      */
-    public function setManufacturer($manufacturer)
+    public function setManufacturerTitle($manufacturerTitle)
     {
-        $this->manufacturer = $manufacturer;
+        $this->manufacturerTitle = $manufacturerTitle;
 
         return $this;
     }
@@ -137,7 +93,7 @@ class Product implements PageInterface
     /**
      * @param string $title
      *
-     * @return Product
+     * @return ImportProduct
      */
     public function setTitle($title)
     {
@@ -157,7 +113,7 @@ class Product implements PageInterface
     /**
      * @param string $description
      *
-     * @return Product
+     * @return ImportProduct
      */
     public function setDescription($description)
     {
@@ -177,7 +133,7 @@ class Product implements PageInterface
     /**
      * @param float $price
      *
-     * @return Product
+     * @return ImportProduct
      */
     public function setPrice($price)
     {
@@ -197,7 +153,7 @@ class Product implements PageInterface
     /**
      * @param int $availability
      *
-     * @return Product
+     * @return ImportProduct
      */
     public function setAvailability($availability)
     {
@@ -217,28 +173,12 @@ class Product implements PageInterface
     /**
      * @param string $image
      *
-     * @return Product
+     * @return ImportProduct
      */
     public function setImage($image)
     {
         $this->image = $image;
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPathPrefix()
-    {
-        return 'product';
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->getPathPrefix() . '/' . $this->getExternalId();
     }
 }

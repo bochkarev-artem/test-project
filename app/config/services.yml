@@ -29,6 +29,22 @@ services:
             - "@fos_elastica.index.products.product"
             - "%default_per_page%"
 
+    product_importer:
+        class: AppBundle\Service\ProductImporter
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+
+    db_importer:
+        class: AppBundle\Service\DbImporter
+        arguments:
+            - "@doctrine.dbal.import_db_connection"
+            - "%import_database_table%"
+
+    xml_importer:
+        class: AppBundle\Service\XmlImporter
+        arguments:
+            - "%xml_path%"
+
     search_provider.route:
         class: AppBundle\Provider\RouteProvider
         arguments:
@@ -37,3 +53,12 @@ services:
             - 100
         tags:
             - { name: fos_elastica.provider, index: routes, type: route }
+
+    search_provider.product:
+        class: AppBundle\Provider\ProductProvider
+        arguments:
+            - "@fos_elastica.index.products.product"
+            - "@doctrine.orm.default_entity_manager"
+            - 100
+        tags:
+            - { name: fos_elastica.provider, index: products, type: product }

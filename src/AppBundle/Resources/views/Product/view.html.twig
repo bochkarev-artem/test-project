@@ -10,8 +10,8 @@
 
     <p class="product-metadata">
         <span class="metadata"><i class="fa fa-user"></i> {{ product.manufacturer.title }}</span>
-        <img src="{{ product.image }}" />
     </p>
+    <p><img src="{{ product.image }}" /></p>
     {{ 'product.description'|trans }}: {{ product.description }}<br>
     {{ 'product.availability'|trans }}: {{ product.availability }}<br>
     {{ 'product.price'|trans }}: {{ product.price }}

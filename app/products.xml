@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<products>
+    <product id="123321">
+        <title>New product1</title>
+        <price>7</price>
+        <availability>100</availability>
+        <manufacturer>TOYO</manufacturer>
+        <additional>Description of product1</additional>
+        <image>http://media2.tyre24.de/images/tyre/245-R-w300-h300-br1.jpg</image>
+    </product>
+    <product id="123322">
+        <title>New product2</title>
+        <price>7</price>
+        <availability>100</availability>
+        <manufacturer>TOYO</manufacturer>
+        <additional/>
+        <image>http://media2.tyre24.de/images/tyre/245-R-w300-h300-br1.jpg</image>
+    </product>
+    <product id="123323">
+        <title>New product3</title>
+        <price>7</price>
+        <availability>100</availability>
+        <manufacturer>TOYO</manufacturer>
+        <additional/>
+        <image>http://media2.tyre24.de/images/tyre/245-R-w300-h300-br1.jpg</image>
+    </product>
+    <product id="123323">
+        <title>New product4</title>
+        <price>7</price>
+        <availability>100</availability>
+        <manufacturer>TOYO</manufacturer>
+        <additional/>
+        <image>http://media2.tyre24.de/images/tyre/245-R-w300-h300-br1.jpg</image>
+    </product>
+</products>

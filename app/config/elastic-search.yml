@@ -29,8 +29,3 @@ fos_elastica:
                             type: "nested"
                             properties:
                                 title:      { type: string }
-                    persistence:
-                        driver: orm
-                        model: AppBundle\Entity\Product
-                        provider: ~
-                        finder: ~
